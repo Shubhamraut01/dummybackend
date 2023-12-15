@@ -7,7 +7,6 @@ Video.sync({ alter: false })
   })
   .catch((error) => {
     console.error("Unable to sync database Video table:", error);
-    // Handle the error appropriately
   });
 
 export { dbConnection };
