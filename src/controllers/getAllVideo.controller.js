@@ -1,4 +1,6 @@
-import { Video } from "../src/models/video.model.js";
+// import { Video } from "../src/models/video.model.js";
+
+import { Video } from "../models/video.model.js";
 
 export const getAllVideo = (req, res) => {
   Video.findAll()
