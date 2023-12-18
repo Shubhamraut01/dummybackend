@@ -16,6 +16,6 @@ const dummyMiddleware = (req, res, next) => {
 };
 
 app.get("/", dummyMiddleware, homeController);
-app.use("/v1", videoRouter);
+app.use("/api/v1/videolibrary", videoRouter);
 
 export { app };
