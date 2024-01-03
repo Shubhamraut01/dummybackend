@@ -1,4 +1,4 @@
-import { Video } from "../models/video.model.js";
+import { Video } from "../../models/video.model.js";
 
 export const addVideos = async (req, res, next) => {
   const videos = req.body; // Assuming req.body contains an array of videos

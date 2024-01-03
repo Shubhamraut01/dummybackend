@@ -1,9 +1,9 @@
-// import { Video } from "../src/models/video.model.js";
+import { User } from "../../models/user.model.js";
 
-import { Video } from "../models/video.model.js";
 
-export const getAllVideo = (req, res) => {
-  Video.findAll()
+
+export const getAllUser = (req, res) => {
+  User.findAll()
     .then((data) => {
       res.status(200).send(data);
       console.log(data);

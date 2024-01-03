@@ -8,6 +8,7 @@ app.use(express.urlencoded({ extended: true, limit: "12kb" })); //extended: true
 
 //routes import
 import videoRouter from "./routes/video.routes.js";
+import userRouter from "./routes/user.routes.js";
 import { homeController } from "./controllers/home.controller.js";
 
 const dummyMiddleware = (req, res, next) => {
@@ -16,6 +17,7 @@ const dummyMiddleware = (req, res, next) => {
 };
 
 app.get("/", dummyMiddleware, homeController);
-app.use("/api/v1/videolibrary", videoRouter);
+app.use("/api/v1/videolibrary", videoRouter, userRouter);
+
 
 export { app };

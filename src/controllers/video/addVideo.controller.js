@@ -1,6 +1,6 @@
 // import { Video } from "../src/models/video.model.js";
 
-import { Video } from "../models/video.model.js";
+import { Video } from "../../models/video.model.js";
 
 export const addVideo = async (req, res, next) => {
   const { title, description, url, published } = req.body;
