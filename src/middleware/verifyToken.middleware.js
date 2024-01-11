@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 export const verifyToken = (req, res, next) => {
     const token = req.headers['authorization'];
-    const secretKey = 'yourSecretKey';
+    const secretKey = process.env.ACCESS_TOKEN_SECRET;
   
     if (!token) {
       return res.status(401).json({ message: 'Token not provided' });

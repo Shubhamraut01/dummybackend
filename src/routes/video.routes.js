@@ -7,7 +7,7 @@ import { verifyToken } from "../middleware/verifyToken.middleware.js";
 const router = express.Router();
 
 router.get("/videos", verifyToken, getAllVideo);
-router.post("/addvideos", addVideos);
-router.post("/addvideo", addVideo);
+router.post("/addvideos",verifyToken, addVideos);
+router.post("/addvideo", verifyToken,addVideo);
 
 export default router;
