@@ -11,7 +11,9 @@ export const signup = async (req, res) => {
     const {username ,password ,email , phone ,role , avatar,cover,} = req.body;
     
     if (!username || !password || !email || !role){
-      throw new ApiError(400,"Username , password ,email and role are required fields")
+      // throw new ApiError(400,"Username , password ,email and role are required fields")
+      res.status(400).send("Username , password ,email and role are required fields")
+
     }
 
    try {
@@ -22,12 +24,14 @@ export const signup = async (req, res) => {
         //  ]
         where: {
           username: username ,
-          email: email
+          // email: email
           
         },
         })
  if(existingUser){
-  throw new ApiError(400,"user already exists")
+
+  // throw new ApiError(400,"user already exists")
+  res.status(400).send("user already exists")
  }
 
          const hashedPassword = await bcrypt.hash(password,10)

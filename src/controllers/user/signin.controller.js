@@ -32,7 +32,7 @@ try {
   
   if (!user){
     // throw new ApiError(401,"incorrect username");
-    res.status(401).send("incorrect username")
+    return res.status(401).json({message:"incorrect username"})
   
   }
   
@@ -41,7 +41,7 @@ try {
   
   if (!isPasswordValid){
     // throw new ApiError(401,"incorrect password");
-    res.status(401).send("incorrect password")
+    return res.status(401).json({message:"incorrect password"})
   }
   
   
@@ -51,7 +51,7 @@ try {
   
   
   // throw ApiResponse(200,token,"login success")
-  res.status(200).json({
+  return res.status(200).json({
     success: true,
     message: "login success",
     AccessToken: token,
@@ -60,6 +60,7 @@ try {
   
 } catch (error) {
   // throw new ApiError(500,"Internal Server Error")
-  res.status(500).send("something went wrong")
+  console.error(error);
+  return res.status(500).json({message:"something went wrong"})
 }
 };
