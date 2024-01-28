@@ -4,6 +4,8 @@ import { User } from "../../models/user.model.js";
 import { ApiError } from "../../utils/ApiError.util.js";
 import { ApiResponse } from "../../utils/ApiResponse.util.js";
 import bcrypt from "bcrypt"
+import { Op } from 'sequelize';
+
 
 
 
@@ -18,20 +20,23 @@ export const signup = async (req, res) => {
 
    try {
      const existingUser = await User.findOne({
-        //  [Op.or]: [
-        //  {username: username},{email: email}
-         
-        //  ]
-        where: {
-          username: username ,
-          // email: email
+      where: {
+        [Op.or]: [
+          { username: username },
+          { email: email }
+        ]
+      }
+        // where: {
+        //   username: username ,
+        //   // email: email
           
-        },
+        // },
         })
  if(existingUser){
 
   // throw new ApiError(400,"user already exists")
-  res.status(400).send("user already exists")
+ return res.status(400).send("user already exists")
+ 
  }
 
          const hashedPassword = await bcrypt.hash(password,10)
@@ -51,7 +56,9 @@ export const signup = async (req, res) => {
    })
   
 // throw ApiResponse(201,newuser,"regestration successful")
-res.status(201).send("regestration successful")
+
+  return res.status(201).send("regestration successful")
+
 
    } catch (error) {
       // throw new ApiError(500,"Internal Server Error")

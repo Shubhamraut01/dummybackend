@@ -13,6 +13,7 @@ const User = dbConnection.define("user", {
   username: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true,
   },
   password: {
     type: DataTypes.STRING,
@@ -21,6 +22,7 @@ const User = dbConnection.define("user", {
   email: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true,
   },
   phone: {
     type: DataTypes.INTEGER,

@@ -23,25 +23,27 @@ export const signin = async (req, res) => {
     console.log(req.body);
 
 try {
+
    const user = await User.findOne({
       where: {
         username: username 
         
       },
     })
-  
+  //  console.log("first",user)
   if (!user){
     // throw new ApiError(401,"incorrect username");
     return res.status(401).json({message:"incorrect username"})
   
   }
   
-  
+ 
   const isPasswordValid = await bcrypt.compare(password, user.password)
   
   if (!isPasswordValid){
     // throw new ApiError(401,"incorrect password");
     return res.status(401).json({message:"incorrect password"})
+    
   }
   
   
@@ -51,11 +53,13 @@ try {
   
   
   // throw ApiResponse(200,token,"login success")
-  return res.status(200).json({
-    success: true,
-    message: "login success",
-    AccessToken: token,
-  });
+
+    return res.status(200).json({
+      success: true,
+      message: "login success",
+      AccessToken: token,
+    });
+
  
   
 } catch (error) {
