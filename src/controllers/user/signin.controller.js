@@ -48,8 +48,18 @@ try {
   
   
   
-    const secretKey = process.env.ACCESS_TOKEN_SECRET;
-    const token = jwt.sign({userId:user.id,username:user.username}, secretKey, { expiresIn: '1h' });
+    const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
+    const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
+
+
+    const accessToken = jwt.sign({userId:user.id,username:user.username}, accessTokenSecret, { expiresIn: '1h' });
+    const refreshToken = jwt.sign({ userId: user.id }, refreshTokenSecret, { expiresIn: '30d' });
+
+       // Set cookies in the response
+       res.cookie('access_token', accessToken, { httpOnly: true });
+       res.cookie('refresh_token', refreshToken, { httpOnly: true });
+
+    await User.update({refreshToken:refreshToken},{where:{id:user.id}})
   
   
   // throw ApiResponse(200,token,"login success")
@@ -57,7 +67,8 @@ try {
     return res.status(200).json({
       success: true,
       message: "login success",
-      AccessToken: token,
+      AccessToken: accessToken,
+      RefreshToken: refreshToken,
     });
 
  
@@ -68,3 +79,13 @@ try {
   return res.status(500).json({message:"something went wrong"})
 }
 };
+
+
+//req.body = (password, username , accessToken , refreshToken)
+
+//senerio 1 refresh token expired 
+//
+
+
+
+//senerio 2 refresh token valid  

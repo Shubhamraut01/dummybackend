@@ -40,6 +40,10 @@ const User = dbConnection.define("user", {
     type: DataTypes.STRING,
     allowNull: true,
   },
+  refreshToken: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 });
 
 export { User };
